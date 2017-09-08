@@ -1,0 +1,66 @@
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Agregar Exposici&oacute;n</h2>
+    <hr>
+  </div>
+  <div class="col-md-12">
+    
+    <form [formGroup]="addExposicionForm" >
+      
+      <div class="form-group">
+        <label for="">Titulo Exposici&oacute;n</label>
+        <input type="text" class="form-control" 
+               placeholder="Nombre Exposicion"
+               [formControl]="addExposicionForm.controls['name']">
+        
+        <div class="alert alert-danger" *ngIf="addExposicionForm.controls['name'].invalid && addExposicionForm.controls['name'].touched">
+          <small *ngIf="addExposicionForm.controls['name'].hasError('required')">El titulo de la Exposicion es Requerido...</small>          
+          <small *ngIf="addExposicionForm.controls['name'].hasError('minlength')">La longitud m&iacute;nima de caracteres es 8</small>
+        </div>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="">Descripcion</label>
+        <textarea [froalaEditor]="options" formControlName="description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="">Fecha</label>
+        <input type="date" class="form-control"
+                placeholder="DD/MM/YYYY"
+               [formControl]="addExposicionForm.controls['exposureDate']"/>
+      </div>
+
+      <div class="form-group">
+        <label for="">Lugar</label>
+        <input type="text" class="form-control"
+               placeholder="E-Garage TEC 4 grados Norte"
+               [formControl]="addExposicionForm.controls['exposureAt']"/>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo Exposici&oacute;n</label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="gender" value="Conferencia" [formControl]="addExposicionForm.controls['tipoExposicion']">
+          Conferencia
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="gender" value="Taller" [formControl]="addExposicionForm.controls['tipoExposicion']">
+          Taller
+        </label>
+      </div>
+
+      <button (click)="addExposicion(addExposicionForm.value)"
+              [disabled] = "!addExposicionForm.valid"
+              class="btn btn-outline-primary">Agregar</button>
+    </form>
+    
+  </div>
+</div>

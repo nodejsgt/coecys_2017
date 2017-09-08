@@ -1,0 +1,59 @@
+<div id="masthead">  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Expositores COECYS 2017
+          <p class="lead"></p>
+        </h1>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<block-ui>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-6"
+         *ngFor="let key of expositoresList | keys" style="cursor:pointer"> 
+      
+      <div class="panel">
+        <div class="panel-body">
+          
+          <!--/stories-->
+            <div class="row" (click)="gotoDetail(expositoresList[key], key)">    
+              <br>
+              <!--Avatar-->
+              <div class="col-md-5 col-sm-5 text-center">              
+                <a class="story-title">
+                  <div class="img-thumbnail"
+                      [ngStyle]="{'background-image': 'url('+ expositoresList[key].avatar +')'}"
+                      style="width:200px;height:200px; background-size:cover; background-position:center">
+
+                </div>
+                </a>
+              </div>
+              <!--Finaliza Avatar-->
+
+              <!--Informacion-->
+              <div class="col-md-7 col-sm-7" >
+                <h3 class="text-align-center">{{expositoresList[key].name | uppercase}}</h3>
+                <div class="row">
+                  <div class="col-xs-9">
+                    <h4><span class="label label-default">{{expositoresList[key].represents}}</span></h4><h4>
+                    <small style="font-family:courier,'new courier';" class="text-muted">
+                      <a class="text-muted">Ver m&aacute;s</a>
+                    </small>
+                    </h4></div>
+                  <div class="col-xs-3"></div>
+                </div>
+                <br><br>
+              </div>
+            <!--Finaliza Informacion-->
+            </div>
+        </div>
+      </div>
+   	</div>
+  </div>
+</div>
+</block-ui>

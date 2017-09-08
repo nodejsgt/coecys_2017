@@ -1,0 +1,104 @@
+
+<block-ui>
+<div class="container margin-top-20" *ngIf="expositorSelected">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Actualizar Expositor
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <form role="form"
+                #updateExpositorForm="ngForm"
+                (ngSubmit)="onUpdate()">
+            <!--Name-->
+            <div class="form-group">
+              <label for="name">Nombre </label>
+              <input type="text" class="form-control" 
+                      placeholder="Nombre Expositor" 
+                      #Name="ngModel" 
+                      id="name"
+                      [(ngModel)] = "expositorSelected.name" 
+                      [ngModelOptions] = "{standalone:true}"
+                      #spy required>
+            </div>
+            <div [hidden]="Name.valid || Name.pristine || Name.untouched"
+                  class="alert alert-danger">
+                  El nombre del Expositor es Requerido
+            </div>
+            <!--finaliza Name-->
+
+            <!--Description-->
+            <div class="form-group">
+              <label for="name">Nombre </label>
+              <div [froalaEditor]="options" [(froalaModel)]="expositorSelected.description">
+
+              </div>
+            </div>
+            <!--Finaliza Description-->
+
+            <!--Represents-->
+            <div class="form-group">
+              <label for="represents">Nombre </label>
+              <input type="text" class="form-control" 
+                      placeholder="Entidad a que representa" 
+                      #Represents="ngModel" 
+                      id="represents"
+                      [(ngModel)] = "expositorSelected.represents" 
+                      [ngModelOptions] = "{standalone:true}">
+            </div>
+            <!--Finaliza Represents-->
+
+            <button type="submit" class="btn btn-outline-primary">Actualizar</button>
+            <button (click)="cancel()" class="btn btn-outline-dark">Cancelar</button>
+
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="row">
+                <div class="col-md-9">
+                  <h2>Exposiciones de {{expositorSelected.name}} </h2>
+                </div>
+                <div class="col-md-3">
+                  <button data-toggle="modal" data-target="#addExpoModal"
+                        class="btn btn-outline-info margin-top-20">
+                      Agregar
+                  </button>
+                </div>
+              </div>
+              <hr>
+              <ul>
+                <li *ngFor="let exposicion of expositorSelected.exposiciones">
+                  {{exposicion.name}} ({{exposicion.tipoExposicion.description}})
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="modal fade" id="addExpoModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <app-expositor-talleres [expositorSelected] = "expositorSelected"
+                                  (onAddExposicion) = "onAddExposicion($event)">
+                  </app-expositor-talleres>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" data-dismiss="modal" #closeBtn>Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>                  
+        </div>
+      </div>
+       
+       
+    </div>
+  </div>
+  
+</div>
+</block-ui>
+

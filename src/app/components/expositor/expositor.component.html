@@ -1,0 +1,93 @@
+
+<block-ui>
+<div id="masthead"  *ngIf="expositorSelected">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-align-center">
+        <div class="img-thumbnail margin-top-20"
+              [ngStyle]="{'background-image': 'url('+ expositorSelected.avatar +')'}"
+              style="width:350px;height:350px; background-size:cover; background-position:center">   
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a [routerLink]="['/expositors']" 
+               class="btn btn-outline-primary margin-bottom-10">
+              Listado
+            </a>
+            <button (click)="gotoUpdate()"
+                  class="btn btn-outline-success margin-bottom-10">
+                  Actualizar
+            </button>
+
+            <button data-toggle="modal" data-target="#addExpoModal"
+                    class="btn btn-outline-info margin-bottom-10">
+                  Agregar Exposicion
+            </button>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="col-lg-8">
+        <h1>
+          {{expositorSelected.name}}
+          <h4><span class="label label-default">{{expositorSelected.represents}}</span></h4>
+        </h1>
+        <br>
+        <div class="panel" *ngIf="haveExpo" >
+          <div class="panel-body">
+            <div *ngFor="let exposicion of expositorSelected.exposiciones">
+              <ul class="list-unstyled">
+                <li><strong>Tema:</strong> {{exposicion.name}}</li>
+                <li><strong>Fecha:</strong> {{exposicion.exposureDate}}</li>
+                <li><strong>Lugar:</strong> {{exposicion.exposureAt}}</li>
+                <li>{{exposicion.tipoExposicion.description}}</li>
+              </ul>
+              <hr>
+            </div>
+            
+          </div>          
+        </div>               
+      </div> 
+    </div> 
+  </div>
+</div>
+
+
+<div class="modal fade" id="addExpoModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <app-expositor-talleres [expositorSelected] = "expositorSelected"
+                                    (onAddExposicion) = "onAddExposicion($event)">
+            </app-expositor-talleres>
+          </div>
+        </div>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" 
+                (click)="closeModal()" data-dismiss="modal"
+                #closeBtn>
+                Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p #descriptionExpositor>
+    </div>
+  </div>
+  
+</div>
+</block-ui>
+
+
